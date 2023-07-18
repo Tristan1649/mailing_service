@@ -1,0 +1,35 @@
+import requests
+
+class APIClient:
+    def send_message(self, recipient, message, access_token):
+        # Логика отправки сообщения через ваше API
+        url = 'https://probe.fbrq.cloud/send/sendMsg'
+        data = {'recipient': recipient, 'message': message}
+        headers = {'Authorization': f'Bearer {access_token}'}
+        response = requests.post(url, json=data, headers=headers)
+        return response.json()
+    
+# Метод send_message выполняет следующие шаги:
+
+# Формирует URL адрес для запроса, который указывает на эндпоинт 'https://probe.fbrq.cloud/send/sendMsg'.
+# Подготавливает данные, которые будут отправлены в запросе. В данном случае, это JSON объект, 
+# содержащий получателя сообщения (recipient) и текст сообщения (message).
+# Создает заголовки запроса (headers), которые содержат авторизационный токен access_token в формате "Bearer".
+# Выполняет POST-запрос на указанный URL с переданными данными и заголовками, используя библиотеку requests.
+# Возвращает JSON-ответ от сервера в виде словаря.
+
+api_client = APIClient()
+
+# Аутентификация с помощью токена доступа JWT
+access_token = 'your_jwt_token'
+recipient = 'user@example.com'
+message = 'Hello, this is a test message.'
+response = api_client.send_message(recipient, message, access_token)
+
+# Обработка ответа
+if 'success' in response and response['success']:
+    print('Сообщение успешно отправлено.')
+else:
+    print('Ошибка отправки сообщения:', response['error_message'])
+
+

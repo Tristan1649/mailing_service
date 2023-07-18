@@ -1,0 +1,37 @@
+from client.openapi_client import ApiClient, ApiException
+from client.api import MessagesApi
+from client.models import SendMessageRequest
+
+# Создание экземпляра клиента API
+api_client = ApiClient()
+
+try:
+    # Аутентификация с помощью токена доступа JWT
+    api_client.authenticate('your_jwt_token')
+
+    # Создание экземпляра API для работы с сообщениями
+    messages_api = MessagesApi(api_client)
+
+    # Создание объекта запроса для отправки сообщения
+    request = SendMessageRequest(message='Hello, World!')
+
+    # Вызов метода API для отправки сообщения
+    response = messages_api.send_message(request)
+
+    # Обработка ответа
+    if response.status_code == 200:
+        # Сообщение успешно отправлено
+        # Можно выполнить дополнительные действия или обновить статус сообщения в базе данных
+        pass
+    else:
+        # Обработка ошибки
+        # Можно выполнить дополнительные действия или записать информацию об ошибке в логи
+        pass
+except ApiException as e:
+    # Обработка ошибок, возвращаемых API
+    # Можно выполнить дополнительные действия или записать информацию об ошибке в логи
+    pass
+except Exception as e:
+    # Обработка других ошибок, например, проблем с соединением или некорректным форматом данных
+    # Можно выполнить дополнительные действия или записать информацию об ошибке в логи
+    pass

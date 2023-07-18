@@ -1,0 +1,22 @@
+#Список этапов, которые будут выполняться последовательно.
+stages:
+  - build
+  - test
+
+# В этом этапе выполняется скрипт 
+# "Building the project...", 
+# который отвечает за сборку проекта.
+build:
+  stage: build
+  script:
+    - echo "Building the project..."
+
+
+# В этом этапе выполняются скрипты 
+# "Running tests..." и "python -m unittest discover", 
+# которые отвечают за запуск тестов проекта.
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - python -m unittest discover
